@@ -1,13 +1,13 @@
 <mat-toolbar color=primary>
   <span>Draw Something!</span>
   <span class="example-fill-remaining-space"></span>
-  <button type="button" mat-button (click)="drawer.toggle()">
+  <!-- <button type="button" mat-button (click)="drawer.toggle()">
     Toggle sidenav
-  </button>
+  </button> -->
   <span>Settings</span>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container">
+<!-- <mat-drawer-container class="example-container">
   <mat-drawer #drawer class="example-sidenav" mode="over">
     <hr>
     <mat-slider
@@ -18,17 +18,18 @@
     <hr>
     <color-sketch [color]="state" (onChangeComplete)="changeComplete($event)"></color-sketch>
 
-</mat-drawer>
+</mat-drawer> -->
 
 
-<!-- <button mat-button [matMenuTriggerFor]="menu">Colour Picker</button> -->
+<button mat-button [matMenuTriggerFor]="menu">Colour Picker</button>
 
-<!-- <mat-menu #menu="matMenu">
+<mat-menu #menu="matMenu">
+  <color-sketch [color]="state" (onChangeComplete)="changeComplete($event)"></color-sketch>
 
 
-</mat-menu> -->
+</mat-menu>
 
-</mat-drawer-container>
+<!-- </mat-drawer-container> -->
 
 
 
