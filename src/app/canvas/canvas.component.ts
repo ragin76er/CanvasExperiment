@@ -1,9 +1,9 @@
 import { Component, Input, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { switchMap, takeUntil, pairwise } from 'rxjs/operators';
-import { ColorPickerMenuComponent } from '../color-picker-menu/color-picker-menu.component';
 import { ColourService } from '../colour.service';
 import { Ihslcolour } from '../ihslcolour';
+import { BrushSizeService } from '../brush-size-service';
 
 @Component({
   selector: 'app-canvas',
@@ -17,7 +17,7 @@ export class CanvasComponent implements AfterViewInit {
   @Input() public width = 1150;
   @Input() public height = 1000;
 
-  constructor(private colourService: ColourService) {}
+  constructor(private colourService: ColourService, private brushService: BrushSizeService) {}
 
   private cx: CanvasRenderingContext2D;
   primaryColor = '#194D33';
@@ -30,6 +30,10 @@ export class CanvasComponent implements AfterViewInit {
     return this.colourService.currentColourHSLA;
   }
 
+  get brushWidth(): number {
+    return this.brushService.currentBrushSize;
+  }
+
   public ngAfterViewInit() {
     const canvasE1: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasE1.getContext('2d');
@@ -37,7 +41,7 @@ export class CanvasComponent implements AfterViewInit {
     canvasE1.width = this.width;
     canvasE1.height = this.height;
 
-    this.cx.lineWidth = 3;
+    this.cx.lineWidth = this.brushWidth;
     this.cx.lineCap = 'round';
     this.cx.strokeStyle = this.hexcolour;
 
@@ -130,9 +134,8 @@ private drawOnCanvas(prevPos: {x: number, y: number, press: number, anglex: numb
         hexcolourWithAlpha = hexcolourWithAlpha.concat(alpha.toString());
 
         this.cx.strokeStyle = hexcolourWithAlpha;
-        this.cx.lineWidth = this.convertAngleToLineWidth(prevPos.anglex);
+        this.cx.lineWidth = this.brushWidth;
 
-        console.log(prevPos.anglex);
       }
 
       this.cx.stroke();

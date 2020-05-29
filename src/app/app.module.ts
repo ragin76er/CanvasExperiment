@@ -1,34 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
+
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CanvasComponent } from './canvas/canvas.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorPickerMenuComponent } from './color-picker-menu/color-picker-menu.component';
-import { MatMenuModule } from '@angular/material';
+import { MatMenuModule, GestureConfig, MatDividerModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule } from '@angular/material/slider';
+import { BrushSizeComponent } from './brush-size/brush-size.component';
+import { BrushSizeService } from './brush-size-service';
+import { ColourService } from './colour.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     CanvasComponent,
-    ColorPickerMenuComponent
+    ColorPickerMenuComponent,
+    BrushSizeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule,
     ColorSketchModule,
+    BrowserAnimationsModule,
+
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

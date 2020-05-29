@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ColorEvent } from 'ngx-color';
 import { ColourService } from '../colour.service';
@@ -10,9 +10,7 @@ import { Ihslcolour } from '../ihslcolour';
   styleUrls: ['./color-picker-menu.component.scss']
 })
 
-
-
-export class ColorPickerMenuComponent {
+export class ColorPickerMenuComponent implements AfterViewInit{
 
 get hexcolour(): string {
   return this.colourService.currentColourHex;
@@ -28,16 +26,21 @@ set rgbcolour(value: Ihslcolour) {
   this.colourService.currentColourHSLA = value;
 }
 
+primaryColour: string;
+state: Ihslcolour;
+
 constructor(private colourService: ColourService) {}
 
-  primaryColour = '#194D33';
-  hexColour = this.primaryColour;
-  state = {
+public ngAfterViewInit() {
+  this.primaryColour = '#194D33';
+  this.hexcolour = this.primaryColour;
+  this.state = {
     h: 150,
     s: 0.50,
     l: 0.20,
     a: 1,
   };
+}
 
   changeComplete($event: ColorEvent) {
     this.state = $event.color.hsl;
