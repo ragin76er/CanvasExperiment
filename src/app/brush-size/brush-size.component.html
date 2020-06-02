@@ -1,8 +1,8 @@
-<button mat-raised-button matTooltip="Change Brush Size" [matMenuTriggerFor]="brushSize">Brush Size</button>
+<button mat-raised-button color="accent" matTooltip="Change Brush Size" [matMenuTriggerFor]="brushSize">Brush Size</button>
 <mat-menu #brushSize="matMenu">
   <mat-slider
   [value]="brushSize"
-  (change)="changeComplete($event)"
+  (change)="onChangeComplete($event)"
   step="1"
   min="1"
   max="100"></mat-slider>

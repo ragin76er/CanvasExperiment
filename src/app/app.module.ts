@@ -17,13 +17,17 @@ import { MatSliderModule } from '@angular/material/slider';
 import { BrushSizeComponent } from './brush-size/brush-size.component';
 import { BrushSizeService } from './brush-size-service';
 import { ColourService } from './colour.service';
+import { ClearCanvasComponent } from './clear-canvas/clear-canvas.component';
+import { SaveCanvasComponent } from './canvas/save-canvas/save-canvas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CanvasComponent,
     ColorPickerMenuComponent,
-    BrushSizeComponent
+    BrushSizeComponent,
+    ClearCanvasComponent,
+    SaveCanvasComponent
   ],
   imports: [
     BrowserModule,

@@ -29,9 +29,7 @@ set rgbcolour(value: Ihslcolour) {
 primaryColour: string;
 state: Ihslcolour;
 
-constructor(private colourService: ColourService) {}
-
-public ngAfterViewInit() {
+constructor(private colourService: ColourService) {
   this.primaryColour = '#194D33';
   this.hexcolour = this.primaryColour;
   this.state = {
@@ -40,6 +38,10 @@ public ngAfterViewInit() {
     l: 0.20,
     a: 1,
   };
+}
+
+public ngAfterViewInit() {
+
 }
 
   changeComplete($event: ColorEvent) {

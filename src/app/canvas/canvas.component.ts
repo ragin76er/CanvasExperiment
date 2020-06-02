@@ -4,6 +4,8 @@ import { switchMap, takeUntil, pairwise } from 'rxjs/operators';
 import { ColourService } from '../colour.service';
 import { Ihslcolour } from '../ihslcolour';
 import { BrushSizeService } from '../brush-size-service';
+import { HostListener } from "@angular/core";
+import { CssSelector } from '@angular/compiler';
 
 @Component({
   selector: 'app-canvas',
@@ -12,12 +14,20 @@ import { BrushSizeService } from '../brush-size-service';
 })
 export class CanvasComponent implements AfterViewInit {
 
+  screenHeight: number;
+  screenWidth: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+  }
+
   @ViewChild('canvas') public canvas: ElementRef;
 
-  @Input() public width = 1150;
-  @Input() public height = 1000;
-
-  constructor(private colourService: ColourService, private brushService: BrushSizeService) {}
+  constructor(private colourService: ColourService, private brushService: BrushSizeService) {
+    this.onResize();
+  }
 
   private cx: CanvasRenderingContext2D;
   primaryColor = '#194D33';
@@ -38,8 +48,8 @@ export class CanvasComponent implements AfterViewInit {
     const canvasE1: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = canvasE1.getContext('2d');
 
-    canvasE1.width = this.width;
-    canvasE1.height = this.height;
+    canvasE1.width = this.screenWidth;
+    canvasE1.height = this.screenHeight;
 
     this.cx.lineWidth = this.brushWidth;
     this.cx.lineCap = 'round';
@@ -50,6 +60,10 @@ export class CanvasComponent implements AfterViewInit {
 
 public changeColourEvent(color: string) {
   this.cx.strokeStyle = color;
+}
+
+public clearCanvasEvent() {
+  this.cx.clearRect(0,0, this.screenWidth, this.screenHeight);
 }
 
 private captureEvents(canvasE1: HTMLCanvasElement) {

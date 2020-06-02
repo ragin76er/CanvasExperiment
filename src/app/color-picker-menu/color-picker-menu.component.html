@@ -4,7 +4,7 @@
   <span>Settings</span>
 </mat-toolbar>
 
-<button mat-raised-button [matMenuTriggerFor]="menu">Colour Picker</button>
+<button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Colour Picker</button>
 
 <mat-menu #menu="matMenu">
   <color-sketch [color]="state" (onChangeComplete)="changeComplete($event)"></color-sketch>

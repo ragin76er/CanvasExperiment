@@ -23,7 +23,7 @@ export class BrushSizeComponent implements OnInit {
     this.brushSize = 1;
   }
 
-  changeComplete($event: MatSliderChange) {
+  onChangeComplete($event: MatSliderChange) {
     this.brushSize = $event.value;
   }
 
